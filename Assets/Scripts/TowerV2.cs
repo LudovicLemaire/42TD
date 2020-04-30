@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class TowerV2 : MonoBehaviour {
 	private Transform target;
-	[Header("Attributes")]
+	public string enemyTag = "Enemy";
+
+	[Header("General")]
 	public float range = 5f;
 	public float turnSpeed = 5f;
+	[Header("Use Projectile (default)")]
+	public GameObject projectilePrefab;
 	public float fireRate = 1f;
 	private float fireCountDown = 0f;
+
+	[Header("Use Laser")]
+	public bool useLaser = false;
+	public LineRenderer lineRenderer;
+	public ParticleSystem impactEffect;
+	public Light impactLight;
+	public ParticleSystem impactEffectCannon;
+	public Light impactLightCannon;
+
 	[Header("Setup")]
-	public string enemyTag = "Enemy";
 	public Transform partToRotate;
-	public GameObject projectilePrefab;
 	public Transform firePoint;
 	
 	// Start is called before the first frame update
@@ -40,18 +51,49 @@ public class TowerV2 : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		if (target == null)
+		if (target == null) {
+			if (useLaser)
+				if (lineRenderer.enabled) {
+					lineRenderer.enabled = false;
+					impactLight.enabled = false;
+					impactEffect.Stop();
+					impactLightCannon.enabled = false;
+					impactEffectCannon.Stop();
+				}
 			return;
+		}
+		LockOnTarget();
+		if (useLaser) {
+			Laser();
+		} else {
+			if (fireCountDown <= 0f) {
+				Shoot();
+				fireCountDown = 1f / fireRate;
+			}
+			fireCountDown -= Time.deltaTime;
+		}
+		
+	}
+	void Laser () {
+		if (!lineRenderer.enabled) {
+			lineRenderer.enabled = true;
+			impactLight.enabled = true;
+			impactEffect.Play();
+			impactLightCannon.enabled = true;
+			impactEffectCannon.Play();
+		}
+		lineRenderer.SetPosition(0, firePoint.position);
+		lineRenderer.SetPosition(1, target.position);
+
+		Vector3 dir = firePoint.position - target.position;
+		impactEffect.transform.position = target.position + dir.normalized * 0.75f;
+		impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+	}
+	void LockOnTarget() {
 		Vector3 dir = target.position - transform.position;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
 		Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 		partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-		
-		if (fireCountDown <= 0f) {
-			Shoot();
-			fireCountDown = 1f / fireRate;
-		}
-		fireCountDown -= Time.deltaTime;
 	}
 	void Shoot () {
 		GameObject projectileGO = (GameObject)Instantiate (projectilePrefab, firePoint.position, firePoint.rotation);
