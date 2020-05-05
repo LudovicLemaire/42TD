@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TowerV2 : MonoBehaviour {
 	private Transform target;
+	private GameObject[] multiEnemies;
 	public string enemyTag = "Enemy";
 
 	[Header("General")]
@@ -13,6 +14,8 @@ public class TowerV2 : MonoBehaviour {
 	public GameObject projectilePrefab;
 	public float fireRate = 1f;
 	private float fireCountDown = 0f;
+	public bool isMulti = false;
+
 
 	[Header("Use Laser")]
 	public bool useLaser = false;
@@ -33,6 +36,8 @@ public class TowerV2 : MonoBehaviour {
 
 	void UpdateTarget () {
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+		if (isMulti)
+			multiEnemies = enemies;
 		float shortestDist = Mathf.Infinity;
 		GameObject nearestEnemy = null;
 		foreach (GameObject enemy in enemies) {
@@ -62,12 +67,18 @@ public class TowerV2 : MonoBehaviour {
 				}
 			return;
 		}
-		LockOnTarget();
+		if (!isMulti)
+			LockOnTarget();
+		else
+			partToRotate.transform.Rotate(Vector3.up * Time.deltaTime * 70, Space.World);
 		if (useLaser) {
 			Laser();
 		} else {
 			if (fireCountDown <= 0f) {
-				Shoot();
+				if (isMulti)
+					ShootMulti();
+				else
+					Shoot();
 				fireCountDown = 1f / fireRate;
 			}
 			fireCountDown -= Time.deltaTime;
@@ -100,6 +111,18 @@ public class TowerV2 : MonoBehaviour {
 		Projectile projectile = projectileGO.GetComponent<Projectile>();
 		if (projectile != null)
 			projectile.Seek(target);
+	}
+	void ShootMulti () {
+		foreach (GameObject enemy in multiEnemies) {
+			float distanceToEnemy = Vector3.Distance (transform.position, enemy.transform.position);
+			if (distanceToEnemy <= range) {
+				GameObject projectileGO = (GameObject)Instantiate (projectilePrefab, firePoint.position, firePoint.rotation);
+				Projectile projectile = projectileGO.GetComponent<Projectile>();
+				if (projectile != null)
+					projectile.Seek(enemy.transform);
+			}
+		}
+		
 	}
 	void OnDrawGizmosSelected() {
 		Gizmos.color = Color.red;

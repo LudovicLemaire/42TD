@@ -14,7 +14,12 @@ public class Projectile : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (target == null) {
-            Destroy(gameObject);
+            if (explosionRadius > 0f) {
+                HitTarget();
+
+            }
+            else
+                Destroy(gameObject);
             return ;
         }
         Vector3 dir = target.position - transform.position;
