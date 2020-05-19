@@ -1,5 +1,5 @@
 # 42TD
-Création d'un Tower Defence sous Unity. Side project développé par Sylrelo et LudovicLemaire sur notre temps libre pour découvrir Unity.
+Création d'un Tower Defence sous Unity. Side project développé par [Sylrelo](https://github.com/Sylrelo) et [Globy](https://github.com/LudovicLemaire) sur notre temps libre pour découvrir Unity.
 
 ## Installation
 Importer le projet sous Unity, il n'y a pas d'.exe disponible pour le moment.
