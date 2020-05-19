@@ -14945,7 +14945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8575306854322993106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.14, y: 1.8, z: -7.39}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8258085401143771295}
@@ -14967,12 +14967,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: Enemy
-  range: 50
+  range: 10
   turnSpeed: 7
   projectilePrefab: {fileID: 0}
   fireRate: 1
   isMulti: 0
   useLaser: 1
+  damageOverTime: 10
+  slowPercent: 0
   lineRenderer: {fileID: 8575306854322993107}
   impactEffect: {fileID: 733271825250165720}
   impactLight: {fileID: 732220077}

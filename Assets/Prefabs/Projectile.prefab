@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5420356241103976668}
+  - component: {fileID: -639820227061022676}
   - component: {fileID: 5031949069890159300}
   - component: {fileID: 3814225771724374141}
   - component: {fileID: 7736193035141540379}
   - component: {fileID: 8156605544916530609}
-  - component: {fileID: -639820227061022676}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -29,12 +29,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247548915007165882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9, y: 0.1, z: -12.70362}
-  m_LocalScale: {x: 0.15, y: 0.075, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.075, y: 0.075, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-639820227061022676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6247548915007165882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f4611eab45db74ca20e01f3082bb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  damage: 5
+  explosionRadius: 0
+  slowPercent: 0.75
+  impactEffect: {fileID: 1470799270721601065, guid: 229baf1b9e8031d44a66a0f6d8d37219,
+    type: 3}
 --- !u!33 &5031949069890159300
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -42,7 +60,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247548915007165882}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3814225771724374141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -112,21 +130,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-639820227061022676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6247548915007165882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f4611eab45db74ca20e01f3082bb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  explosionRadius: 0
-  impactEffect: {fileID: 1470799270721601065, guid: 229baf1b9e8031d44a66a0f6d8d37219,
-    type: 3}
-  deathEffect: {fileID: 7324707233295374110, guid: 147728d84e5f140439b56d6a52e35d7f,
-    type: 3}

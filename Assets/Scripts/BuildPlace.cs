@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class BuildPlace : MonoBehaviour {
-    public GameObject towerPrefab;
     public Color hoverColor;
+    public Color notEnoughMoneyColor;
     public Vector3 positionOffset;
     [Header("Optional")]
     public GameObject tower;
@@ -36,7 +36,11 @@ public class BuildPlace : MonoBehaviour {
             return;
         if (!buildManager.CanBuild)
             return;
-        rend.material.color = hoverColor;
+        if (buildManager.HasEnoughMoney) {
+            rend.material.color = hoverColor;
+        } else {
+            rend.material.color = notEnoughMoneyColor;
+        }
     }
     void OnMouseExit() {
         rend.material.color = startColor;

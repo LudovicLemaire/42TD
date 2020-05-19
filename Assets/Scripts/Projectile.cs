@@ -5,9 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
     private Transform target;
     public float speed = 5f;
+    public float damage = 10f;
     public float explosionRadius = 0f;
+    public float slowPercent = 0f;
     public GameObject impactEffect;
-    public GameObject deathEffect;
+    
     public void Seek (Transform _target) {
         target = _target;
     }
@@ -34,7 +36,7 @@ public class Projectile : MonoBehaviour {
     }
     void HitTarget() {
         GameObject effectIns =  (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effectIns, 5f);
+        Destroy(effectIns, 3f);
         if (explosionRadius > 0f) {
             Explode();
         } else {
@@ -53,9 +55,12 @@ public class Projectile : MonoBehaviour {
     }
 
     void Damage (Transform enemy) {
-        GameObject effectIns =  (GameObject)Instantiate(deathEffect, enemy.transform.position, enemy.transform.rotation);
-        Destroy(effectIns, 3f);
-        Destroy(enemy.gameObject);
+        Monster e = enemy.GetComponent<Monster>();
+        if (e) {
+            if (slowPercent > 0)
+                e.Slow(slowPercent);
+            e.TakeDamage(damage);
+        }
     }
 
     void OnDrawGizmosSelected() {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TowerV2 : MonoBehaviour {
 	private Transform target;
+	private Monster targetEnemy;
 	private GameObject[] multiEnemies;
 	public string enemyTag = "Enemy";
 
@@ -16,14 +17,16 @@ public class TowerV2 : MonoBehaviour {
 	private float fireCountDown = 0f;
 	public bool isMulti = false;
 
-
 	[Header("Use Laser")]
 	public bool useLaser = false;
+	public float damageOverTime = 5f;
+	public float slowPercent = 0;
 	public LineRenderer lineRenderer;
 	public ParticleSystem impactEffect;
 	public Light impactLight;
 	public ParticleSystem impactEffectCannon;
 	public Light impactLightCannon;
+	
 
 	[Header("Setup")]
 	public Transform partToRotate;
@@ -49,6 +52,7 @@ public class TowerV2 : MonoBehaviour {
 		}
 		if (nearestEnemy != null && shortestDist <= range) {
 			target = nearestEnemy.transform;
+			targetEnemy = nearestEnemy.GetComponent<Monster>();
 		} else {
 			target = null;
 		}
@@ -86,6 +90,10 @@ public class TowerV2 : MonoBehaviour {
 		
 	}
 	void Laser () {
+		targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+		if (slowPercent > 0) {
+			targetEnemy.Slow(slowPercent);
+		}
 		if (!lineRenderer.enabled) {
 			lineRenderer.enabled = true;
 			impactLight.enabled = true;

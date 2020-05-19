@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shop : MonoBehaviour {
     public TowerBlueprint basicTower;
     public TowerBlueprint siegeTower;
+    public TowerBlueprint laserTower;
     BuildManager buildManager;
     
     void Start () {
@@ -15,5 +16,8 @@ public class Shop : MonoBehaviour {
     }
     public void SelectSiegeTower () {
         buildManager.SelectTowerToBuild(siegeTower);
+    }
+    public void SelectLaserTower () {
+        buildManager.SelectTowerToBuild(laserTower);
     }
 }

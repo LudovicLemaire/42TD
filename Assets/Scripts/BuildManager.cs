@@ -14,12 +14,22 @@ public class BuildManager : MonoBehaviour
     }
     public GameObject basicTowerPrefab;
     public GameObject siegeTowerPrefab;
+    public GameObject laserTowerPrefab;
+    public GameObject buildEffect;
     
     private TowerBlueprint towerToBuild;
     public bool CanBuild {get {return towerToBuild != null; } }
+    public bool HasEnoughMoney {get {return PlayerStats.Money >= towerToBuild.cost; } }
     public void BuildTowerOn (BuildPlace buildPlace) {
-        GameObject tower = (GameObject)Instantiate(towerToBuild.prefab, buildPlace.GetBuildPosition(), transform.rotation);
+        if (PlayerStats.Money < towerToBuild.cost) {
+            Debug.Log("Too poor");
+            return;
+        }
+        PlayerStats.Money -= towerToBuild.cost;
+        GameObject tower = (GameObject)Instantiate(towerToBuild.prefab, buildPlace.GetBuildPosition(), Quaternion.identity);
         buildPlace.tower = tower;
+        GameObject effect = (GameObject)Instantiate(buildEffect, buildPlace.GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 3f);
     }
     public void SelectTowerToBuild (TowerBlueprint tower) {
         towerToBuild = tower;

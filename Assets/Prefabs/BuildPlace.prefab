@@ -109,4 +109,6 @@ MonoBehaviour:
   towerPrefab: {fileID: 3037407683881296888, guid: 843e1263ebb4f204eac69c2b6d9c0a4f,
     type: 3}
   hoverColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 0}
+  notEnoughMoneyColor: {r: 1, g: 0.57911307, b: 0, a: 0}
   positionOffset: {x: 0.25, y: 1.275, z: 0.5}
+  tower: {fileID: 0}

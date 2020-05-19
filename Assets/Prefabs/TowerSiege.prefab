@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6158279834213272562}
   - component: {fileID: 8808260759499249496}
   m_Layer: 0
-  m_Name: Siege Tower
+  m_Name: TowerSiege
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278223616723584476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18817616, y: 1.7722561, z: -10.542719}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 452455816130753169}
@@ -45,13 +45,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db987970ac6d96e48b638dbe19ad2d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
-  turnSpeed: 5
-  fireRate: 0.5
   enemyTag: Enemy
-  partToRotate: {fileID: 452455816130753169}
+  range: 15
+  turnSpeed: 5
   projectilePrefab: {fileID: 3976631864220748805, guid: 56257d058cf290c48b5ce2d444687907,
     type: 3}
+  fireRate: 0.5
+  isMulti: 0
+  useLaser: 0
+  damageOverTime: 5
+  slowPercent: 0.75
+  lineRenderer: {fileID: 0}
+  impactEffect: {fileID: 0}
+  impactLight: {fileID: 0}
+  impactEffectCannon: {fileID: 0}
+  impactLightCannon: {fileID: 0}
+  partToRotate: {fileID: 452455816130753169}
   firePoint: {fileID: 3576140304776876763}
 --- !u!1 &2807893568040639441
 GameObject:
