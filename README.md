@@ -8,4 +8,4 @@ Tout développer soit meme avec Unity et Blender.
 Importer le projet sous Unity, il n'y a pas d'.exe disponible pour le moment.
 
 ## Aperçu
-![screenshot](https://raw.githubusercontent.com/Sylrelo/42-Doom-Nukem/master/git_ressources/screen0.png)
+[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/T-D1KVIuvjA)
